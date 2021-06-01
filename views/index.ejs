@@ -1,0 +1,17 @@
+
+<h1 class="text-4xl">Hello World</h1>
+
+<div class="my-6">
+  <% if (locals.isAuthenticated) { %>
+    <p>You are logged in. <a href="/profile" class="underline">Check your profile</a>.</p>
+  <% } else { %>
+    <p>You are not logged in. <a href="/login" class="underline">Login</a>.</p>
+  <% } %>
+  
+</div>
+<div>
+  <h2 class="text-2xl">Customers</h2>
+  <div class="mt-2 p-2 bg-gray-100 font-mono">
+    <%= locals.customers %>
+  </div>
+</div>

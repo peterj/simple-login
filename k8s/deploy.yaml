@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-frontend
+  labels:
+    app: web-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-frontend
+  template:
+    metadata:
+      labels:
+        app: web-frontend
+        version: v1
+    spec:
+      containers:
+        - image: gcr.io/tetratelabs/simple-login:1.0.0
+          imagePullPolicy: Always
+          name: web
+          ports:
+            - containerPort: 3000
+          env:
+            - name: CUSTOMER_SERVICE_URL
+              value: 'http://customers'
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: webfrontend-auth0
+                  key: CLIENT_ID
+            - name: SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: webfrontend-auth0
+                  key: SECRET
+            - name: ISSUER_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: webfrontend-auth0
+                  key: ISSUER_BASE_URL
+            - name: AUDIENCE
+              valueFrom:
+                configMapKeyRef:
+                  name: webfrontend-auth0
+                  key: AUDIENCE
+            - name: BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: webfrontend-auth0
+                  key: BASE_URL
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-frontend
+  labels:
+    app: web-frontend
+spec:
+  selector:
+    app: web-frontend
+  ports:
+    - port: 80
+      name: http
+      targetPort: 3000

@@ -1,0 +1,9 @@
+
+  <h1 class="text-4xl mb-4">Hello <%= user.nickname %></h1>
+
+  <% if (user.picture) { %>
+    <img class="block py-3" src="<%= user.picture %>" width="300">
+  <% } %>
+
+  <div class="block bg-gray-300 p-4 text-sm overflow-scroll"><%= userProfile %></div>
+
