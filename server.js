@@ -34,6 +34,11 @@ const config = {
 };
 
 const port = process.env.PORT || 3000;
+
+// To run locally, set the PORT and unset the BASE_URL.
+// E.g.
+// unset BASE_URL
+// PORT=3000 npm run dev
 if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.NODE_ENV !== 'production') {
   config.baseURL = `http://localhost:${port}`;
 }

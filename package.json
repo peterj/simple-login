@@ -2,7 +2,7 @@
   "name": "simple-login",
   "version": "0.1.0",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon -e 'js|ejs|node' server.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
