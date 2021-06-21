@@ -75,7 +75,7 @@ spec:
   selector:
     matchLabels:
       app: customers
-    template:
+  template:
     metadata:
       labels:
         app: customers
